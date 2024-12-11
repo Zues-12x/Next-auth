@@ -12,20 +12,20 @@ import {
   FormItem,
   FormField,
 } from "../ui/form";
-import { LoginSchema } from "@/schemas/index";
+import { RegisterSchema } from "@/schemas/index";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../form-error";
 import FormSuccess from "../form-success";
-import { login } from "@/actions/login";
+import { register } from "@/actions/register";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const form = useForm({
-    resolver: zodResolver(LoginSchema),
-    defaultValues: { email: "", password: "" },
+    resolver: zodResolver(RegisterSchema),
+    defaultValues: { email: "", password: "", name: "" },
   });
 
   const onSubmit = (values) => {
@@ -33,7 +33,7 @@ export default function LoginForm() {
     setSuccess("");
 
     startTransition(async () => {
-      const response = await login(values);
+      const response = await register(values);
       setError(response?.error);
       setSuccess(response?.success);
     });
@@ -42,9 +42,9 @@ export default function LoginForm() {
   return (
     <>
       <CardWrapper
-        backButtonLabel="Don't have an account?"
-        backButtonHref="/auth/register"
-        headerLabel="Welcome back"
+        backButtonLabel="Already have an account?"
+        backButtonHref="/auth/login"
+        headerLabel="Nawa ayan ay sohneya?"
         showSocial
       >
         <Form {...form}>
@@ -86,11 +86,29 @@ export default function LoginForm() {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Enter name"
+                        type="string"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button type="submit" className="w-full">
-              Login
+              Register
             </Button>
           </form>
         </Form>
