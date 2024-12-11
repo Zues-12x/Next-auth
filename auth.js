@@ -12,6 +12,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             }
             return session
         },
+        // async signIn({ user }) {
+        //     const existingUser = await getUserbyId(user.id);
+        //     if (!existingUser || !existingUser.isVerified) {
+        //         return false;
+        //     }
+        //     return true;
+        // },
         async jwt({ token }) {
             if (token.sub) {
                 const existingUser = await getUserbyId(token.sub);
