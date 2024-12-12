@@ -43,8 +43,11 @@ export default function NewVerificationForm() {
       backButtonHref="/auth/login"
       backButtonLabel="Back to login"
     >
-      <div className="flex items-center justify-center my-2">
-        <button onClick={onSubmit} className="bg-blue-700 p-2 rounded-md">
+      <div className="flex items-center justify-center mb-2">
+        <button
+          onClick={onSubmit}
+          className="bg-blue-700 text-xl p-3 rounded-md text-white"
+        >
           Verify
         </button>
       </div>
