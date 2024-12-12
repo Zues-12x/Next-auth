@@ -45,6 +45,7 @@ export const newPassword = async (values, token) => {
             password: hashedPassword
         }
     })
+
     await db.passwordResetToken.delete({
         where: {
             id: existingToken.id
