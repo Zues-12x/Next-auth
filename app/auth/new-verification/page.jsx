@@ -1,3 +1,5 @@
+import NewVerificationForm from "@/components/auth/NewVerificationForm";
+
 export default function Verifypage() {
-  return <div></div>;
+  return <NewVerificationForm />;
 }
