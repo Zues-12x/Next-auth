@@ -1,3 +1,5 @@
+import NewPasswordForm from "@/components/auth/NewPasswordForm";
+
 export default function ResetPasswordPage() {
-  return <div>Pasword reset krlo</div>;
+  return <NewPasswordForm />;
 }
