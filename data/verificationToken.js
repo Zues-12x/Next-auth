@@ -1,25 +1,25 @@
 const { db } = require("@/lib/db");
 
-export const getTwoFactorTokenByToken = async (token) => {
+export const getVerificationTokenByToken = async (token) => {
     try {
-        const twoFactorToken = await db.verificationToken.findUnique({
+        const verificationToken = await db.verificationToken.findUnique({
             where: { token }
         })
 
-        return twoFactorToken
+        return verificationToken
     } catch (error) {
         return null
     }
 }
 
 
-export const getTwoFactorTokenByEmail = async (email) => {
+export const getVerificationTokenByEmail = async (email) => {
     try {
-        const twoFactorToken = await db.verificationToken.findFirst({
+        const verificationToken = await db.verificationToken.findFirst({
             where: { email }
         })
 
-        return twoFactorToken
+        return verificationToken
     } catch (error) {
         return null
     }
