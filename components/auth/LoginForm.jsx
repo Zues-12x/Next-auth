@@ -57,7 +57,6 @@ export default function LoginForm() {
       }
       if (response?.twoFactor) {
         setShowTwoFactor(true);
-        form.setFocus("code");
       }
     });
   };

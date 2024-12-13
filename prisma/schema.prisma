@@ -92,3 +92,4 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
