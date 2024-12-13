@@ -2,11 +2,11 @@ const { db } = require("@/lib/db");
 
 export const getTwoFactorTokenByEmail = async (email) => {
     try {
-        const verificationToken = await db.twoFactorToken.findFirst({
+        const twoFactorToken = await db.twoFactorToken.findFirst({
             where: { email }
         })
 
-        return verificationToken
+        return twoFactorToken
     } catch (error) {
         return null
     }
@@ -14,11 +14,11 @@ export const getTwoFactorTokenByEmail = async (email) => {
 
 export const getTwoFactorTokenByToken = async (token) => {
     try {
-        const verificationToken = await db.twoFactorToken.findUnique({
+        const twoFactorToken = await db.twoFactorToken.findUnique({
             where: { token }
         })
 
-        return verificationToken
+        return twoFactorToken
     } catch (error) {
         return null
     }

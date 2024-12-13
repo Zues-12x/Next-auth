@@ -3,6 +3,7 @@ import authConfig from "./auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "./lib/db"
 import { getUserbyId } from "./data/user"
+import { getTwoFactorConfirmationByUserId } from "./data/twoFactorConfirmation"
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
     page: {
@@ -32,7 +33,19 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
             if (!existingUser || !existingUser?.emailVerified) return false;
 
-            //2fa krna ha check 
+            if (existingUser.isTwoFactorEnabled) {
+                const twoFactorConfirmed = await getTwoFactorConfirmationByUserId(existingUser.id)
+
+                if (!twoFactorConfirmed) {
+                    return false;
+                }
+
+                await db.twoFactorConfirmation.delete({
+                    where: {
+                        id: twoFactorConfirmed.id
+                    }
+                })
+            }
             return true;
         },
         async jwt({ token }) {
