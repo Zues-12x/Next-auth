@@ -12,7 +12,7 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import { LoginSchema } from "@/schemas"
 import { getTwoFactorConfirmationByUserId } from "@/data/twoFactorConfirmation"
 
-export const login = async (values) => {
+export const login = async (values, callbackUrl = "/settings") => {
 
     // await new Promise(resolve => setTimeout(() => resolve(console.log("object")), 4000));
 
@@ -94,7 +94,7 @@ export const login = async (values) => {
             }
         }
 
-        await signIn("credentials", { email, password, redirectTo: DEFAULT_LOGIN_REDIRECT });
+        await signIn("credentials", { email, password, redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT });
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {

@@ -6,7 +6,7 @@ export default function ClientPage() {
   const session = useSession();
   return (
     <UserInfo
-      user={session.data.user}
+      user={session?.data?.user}
       label={"User Info: (client component)"}
     />
   );
