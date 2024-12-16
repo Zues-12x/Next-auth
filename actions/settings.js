@@ -10,8 +10,6 @@ const { SettingsSchema } = require("@/schemas")
 
 export const settings = async (values) => {
 
-    console.log(values)
-
     const { user } = await auth()
 
     if (!user) {

@@ -8,7 +8,6 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export default function Social() {
   const onClick = (provider) => {
-    console.log(provider);
     signIn(provider, {
       callbackUrl: DEFAULT_LOGIN_REDIRECT,
     });
